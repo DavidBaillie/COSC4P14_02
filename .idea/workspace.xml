@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ae1ad94-2854-4c27-bcd7-cce6bc2cb1b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/MAIN.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MAIN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MAIN.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +30,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Java_Test" />
+  </component>
+  <component name="RunManager">
+    <configuration name="MAIN" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MAIN" />
+      <module name="COSC4P14" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MAIN" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -43,10 +57,33 @@
       <option name="presentableId" value="Default" />
       <updated>1582572080244</updated>
       <workItem from="1582572081783" duration="79000" />
+      <workItem from="1583162859944" duration="3045000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="463" y="125" key="FileChooserDialogImpl" timestamp="1583165528465">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="125" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1583165528465" />
+    <state width="1323" height="182" key="GridCell.Tab.0.bottom" timestamp="1583166270194">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1583166270194" />
+    <state width="1323" height="182" key="GridCell.Tab.0.center" timestamp="1583166270194">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1583166270194" />
+    <state width="1323" height="182" key="GridCell.Tab.0.left" timestamp="1583166270193">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1583166270193" />
+    <state width="1323" height="182" key="GridCell.Tab.0.right" timestamp="1583166270194">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1583166270194" />
   </component>
 </project>
