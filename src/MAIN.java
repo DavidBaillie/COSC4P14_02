@@ -1,3 +1,4 @@
+import com.sun.org.apache.xml.internal.serializer.Encodings;
 import jdk.jfr.events.ExceptionThrownEvent;
 
 import javax.xml.crypto.Data;
@@ -14,6 +15,9 @@ public class MAIN {
     public MAIN () {
         requestQueue = new ConcurrentLinkedQueue<>();
 
+        int[][] blockedAddresses = {{50, 28, 51, 184}, {208, 80, 154, 224}};
+        int[] redirect = {139, 157, 100, 6};
+
         //Thread used to listen for inbound UDP messages
         Thread requestReceiver = new Thread () {
             public void run () {
@@ -26,6 +30,9 @@ public class MAIN {
                         byte[] buffer = new byte[1024];
                         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                         socket.receive(packet);
+
+                        System.out.println(buffer.toString());
+                        System.out.println("-------------------------------------------------------------------------");
 
                         //Save the packet for use
                         requestQueue.add(packet);
@@ -72,6 +79,9 @@ public class MAIN {
                         //Replace any blocked websites
                         inPacket = modifyPacket(inPacket);
 
+                        System.out.println();
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
                         //Send off the finalized response to the original DNS request
                         DatagramPacket response = new DatagramPacket(inPacket.getData(), inPacket.getLength(),
                                 sourcePacket.getAddress(), sourcePacket.getPort());
@@ -91,7 +101,37 @@ public class MAIN {
              * @return Modifies packet
              */
             private DatagramPacket modifyPacket (DatagramPacket packet) {
-                return null;
+
+                int answerCount = packet.getData()[6] * 256 + packet.getData()[7];
+                System.out.println(answerCount + " answers received");
+
+                int startOffset = 32;
+
+                for (int i = 0; i < 200; i++){
+                    if (i == 32) System.out.println(">>");
+                    if (i % 16 == 0) System.out.println("");
+                    if (i % 8 == 0) System.out.print("|\t\t");
+                    System.out.print((packet.getData()[i] & 0xFF) + "\t\t");
+                }
+
+                for (int i = 0; i < answerCount; i++) {
+
+                    int[] sourceIP = {packet.getData()[startOffset++]&0xFF, packet.getData()[startOffset++]&0xFF,
+                            packet.getData()[startOffset++]&0xFF, packet.getData()[startOffset++]&0xFF};
+
+                    for (int t : sourceIP) System.out.print(t + ".");
+
+                    for (int x = 0; x < blockedAddresses.length; x++) {
+                        if (blockedAddresses[x][0] == sourceIP[0] && blockedAddresses[x][1] == sourceIP[1] &&
+                        blockedAddresses[x][2] == sourceIP[2] && blockedAddresses[x][3] == sourceIP[3]){
+                            System.out.println("match");
+                        }
+                        else System.out.println("NONE");
+                    }
+                    startOffset += 12;
+                }
+
+                return packet;
             }
         };
         requestHandler.setDaemon(true);
