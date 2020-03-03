@@ -105,12 +105,30 @@ public class MAIN {
                 int answerCount = packet.getData()[6] * 256 + packet.getData()[7];
                 System.out.println(answerCount + " answers received");
 
+                //grab data and start offset at question data
+                byte[] data = packet.getData();
+                int offset = 12;
+
+                //iterate through question size
+                while (data[offset] != 0x00){
+                    offset += (data[offset] + 1);
+                }
+                offset += 8;
+
+                System.out.println("Answer Type: " + (data[offset] & 0xFF));
+
+                if ((data[offset] & 0xFF) == 0x01)
+                    offset += 9;
+                else if ((data[offset] & 0xFF) == 0x05)
+                    offset +=
+
+
                 int startOffset = 32;
 
                 for (int i = 0; i < 200; i++){
-                    if (i == 32) System.out.println(">>");
-                    if (i % 16 == 0) System.out.println("");
-                    if (i % 8 == 0) System.out.print("|\t\t");
+                    if (i == 28) System.out.println(">>");
+                    if (i % 4 == 0) System.out.println("");
+                    //if (i % 8 == 0) System.out.print("|\t\t");
                     System.out.print((packet.getData()[i] & 0xFF) + "\t\t");
                 }
 
