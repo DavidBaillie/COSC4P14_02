@@ -5,8 +5,8 @@ import java.net.Socket;
 
 public class PacketHandler {
 
-    static int[][] blockedAddresses = {{50, 28, 51, 184}, {208, 80, 154, 224}};
-    static int[] redirect = {139, 157, 100, 6};
+    private static int[][] blockedAddresses = {{50, 28, 51, 184}, {208, 80, 154, 224}};
+    private static int[] redirect = {139, 157, 100, 6};
 
     /**
      * Constructor
@@ -38,10 +38,18 @@ public class PacketHandler {
 
         System.out.println("Got packet back from Google");
 
+        inPacket.setData(modifyData(inPacket.getData()));
+
+        System.out.println("Completed data modification");
+
         DatagramPacket response = new DatagramPacket(inPacket.getData(), inPacket.getLength(),
                 sourcePacket.getAddress(), sourcePacket.getPort());
         sourceSocket.send(response);
 
         System.out.println("Transaction complete");
+    }
+
+    private byte[] modifyData (byte[] data) {
+        return data;
     }
 }
