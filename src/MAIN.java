@@ -119,8 +119,8 @@ public class MAIN {
 
                 if ((data[offset] & 0xFF) == 0x01)
                     offset += 9;
-                else if ((data[offset] & 0xFF) == 0x05)
-                    offset +=
+                //else if ((data[offset] & 0xFF) == 0x05)
+                    //offset +=
 
 
                 int startOffset = 32;
