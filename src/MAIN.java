@@ -10,11 +10,6 @@ import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MAIN {
-
-    private ConcurrentLinkedQueue<DatagramPacket> requestQueue;
-    static int[][] blockedAddresses = {{50, 28, 51, 184}, {208, 80, 154, 224}};
-    static int[] redirect = {139, 157, 100, 6};
-
     /**
      * Runnable Main static method for class
      * @param args
