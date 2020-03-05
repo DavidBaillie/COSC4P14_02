@@ -38,18 +38,55 @@ public class PacketHandler {
 
         System.out.println("Got packet back from Google");
 
-        inPacket.setData(modifyData(inPacket.getData()));
+        //inPacket.setData(modifyData(inPacket.getData()));
+        byte[] data = inPacket.getData();
+        data = modifyData(data);
 
         System.out.println("Completed data modification");
 
-        DatagramPacket response = new DatagramPacket(inPacket.getData(), inPacket.getLength(),
+        DatagramPacket response = new DatagramPacket(data, inPacket.getLength(),
                 sourcePacket.getAddress(), sourcePacket.getPort());
         sourceSocket.send(response);
+
+        sourceSocket.close();
+        requestSocket.close();
 
         System.out.println("Transaction complete");
     }
 
+    /**
+     * Looks for the bad IP address and replaces it
+     * @param data Byte array to change
+     * @return Fixed array
+     */
     private byte[] modifyData (byte[] data) {
+
+        //check all bytes
+        for (int i = 0; i < data.length; i++) {
+            //check against all blocked IP's
+            for (int[] values : blockedAddresses){
+                //if the first character matches
+                if (read(data[i]) == values[0]) {
+                    //Check for complete match
+                    if (read(data[i + 1]) == values[1] && read(data[i + 2]) == values[2]
+                            && read(data[i + 3]) == values[3]){
+                        //Swap all IP values
+                        for (int k = 0; k < 4; k++) {
+                            data[i + k] = write(redirect[k]);
+                        }
+                    }
+                }
+            }
+        }
+
         return data;
+    }
+
+    static int read (byte b) {
+        return b & 0xFF;
+    }
+
+    static byte write (int i) {
+        return (byte)(i & 0xFF);
     }
 }

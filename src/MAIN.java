@@ -1,4 +1,5 @@
 import com.sun.org.apache.xml.internal.serializer.Encodings;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import jdk.jfr.events.ExceptionThrownEvent;
 
 import javax.xml.crypto.Data;
@@ -22,14 +23,18 @@ public class MAIN {
 
         System.out.println("Press q to quit");
 
+        Thread ender = new Thread () {
+            public void run () {
+                if (new Scanner(System.in).nextLine().equals("q")) System.exit(0);
+            }
+        }; ender.setDaemon(true); ender.start();
+
         while (true){
             try {
                 new PacketHandler();
             } catch (Exception e) {
                 System.out.println("Error occurred while processing request:\n" + e);
             }
-
-            if (new Scanner(System.in).nextLine().equals("q")) break;
         }
     }
 }
